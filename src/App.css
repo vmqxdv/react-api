@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 1.25rem;
+}
+
+.card {
+  background-color: white;
+  border: 0.06rem solid white;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.38rem rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 18.75rem;
+}
+
+.card:hover {
+  transform: translateY(-0.31rem);
+  box-shadow: 0 0.38rem 0.64rem rgba(0, 0, 0, 0.15);
+}
+
+.img-container {
+  width: 100%;
+  height: 12.5rem;
+  overflow: hidden;
+}
+
+.img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info {
+  padding: 0.94rem;
+}
+
+.name {
+  font-size: 1.5rem;
+  margin: 0 0 0.64rem;
+  color: #333;
+}
+
+.nationality,
+.birth,
+.biography,
+.awards {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0.30rem 0;
+}
+
+hr {
+  border: none;
+  border-top: 0.06rem solid white;
+  margin: 0.64rem 0;
+}
+
+.actresses,
+.actors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.filter-buttons button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 0.06rem solid white;
+  border-radius: 0.5rem;
+  background-color: #f4f4f9;
+  cursor: pointer;
+}
+
+.filter-buttons button:hover {
+  background-color: white;
+  transform: scale(1.05);
+}
+
+.filter-buttons button:active {
+  transform: scale(1);
+}
+
+.load-more {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.load-more button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 0.06rem solid white;
+  border-radius: 0.5rem;
+  background-color: #f4f4f9;
+  cursor: pointer;
+}
+
+.load-more button:hover {
+  background-color: white;
+  transform: scale(1.05);
+}
+
+.load-more button:active {
+  transform: scale(1);
+}

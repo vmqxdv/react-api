@@ -1,24 +1,29 @@
+import './App.css';
+
 import Axios from 'axios';
 import { useEffect, useState } from 'react';
+
 
 export default function App() {
   const [Actresses, SetActresses] = useState([]);
   const [Actors, SetActors] = useState([]);
+  const [Filter, SetFilter] = useState('all');
+  const [VisibleItems, SetVisibleItems] = useState(10);
 
 
 
   const FetchActresses = () => {
     Axios.get('https://www.freetestapi.com/api/v1/actresses')
-    .then((Res) => SetActresses(Res.data))
+      .then((Res) => SetActresses(Res.data));
   };
-  
+
   const FetchActors = () => {
     Axios.get('https://www.freetestapi.com/api/v1/actors')
-      .then((Res) => SetActors(Res.data))
+      .then((Res) => SetActors(Res.data));
   };
 
 
-  
+
   useEffect(() => {
     FetchActresses();
     FetchActors();
@@ -27,7 +32,9 @@ export default function App() {
 
 
   const GenerateCards = (data) => {
-    return data.map((element, i) => {
+    const sortedData = [...data].sort((a, b) => a.name.localeCompare(b.name));
+
+    return sortedData.map((element, i) => {
       const { image, name, nationality, birth_year: birthYear, death_year: deathYear, biography, awards } = element;
 
       return (
@@ -44,21 +51,55 @@ export default function App() {
             <p className='awards'>Riconoscimenti: {awards}</p>
           </div>
         </div>
-      )
-    })
+      );
+    });
+  };
+
+
+
+  const RenderFilteredCards = () => {
+    const dataMap = {
+      all: (
+        <>
+          <div key="actresses" className="actresses">
+            {GenerateCards(Actresses.slice(0, VisibleItems))}
+          </div>
+
+          <div key="actors" className="actors">
+            {GenerateCards(Actors.slice(0, VisibleItems))}
+          </div>
+        </>
+      ),
+      actresses: (
+        <div key="actresses" className="actresses">
+          {GenerateCards(Actresses.slice(0, VisibleItems))}
+        </div>
+      ),
+      actors: (
+        <div key="actors" className="actors">
+          {GenerateCards(Actors.slice(0, VisibleItems))}
+        </div>
+      ),
+    };
+
+    return dataMap[Filter] || null;
   };
 
 
 
   return (
-    <div className='cards'>
-      <div key='actresses' className='actresses'>
-        {GenerateCards(Actresses)}
+    <div>
+      <div className='filter-buttons'>
+        <button onClick={() => SetFilter('all')}>Tutti</button>
+        <button onClick={() => SetFilter('actresses')}>Attrici</button>
+        <button onClick={() => SetFilter('actors')}>Attori</button>
       </div>
 
-      <div key='actors' className='actors'>
-        {GenerateCards(Actors)}
+      <div className='cards'>{RenderFilteredCards()}</div>
+
+      <div className="load-more">
+        <button onClick={() => SetVisibleItems((prev) => prev + 10)}>Carica altro</button>
       </div>
     </div>
-  )
+  );
 };
